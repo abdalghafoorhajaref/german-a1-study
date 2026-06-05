@@ -40,6 +40,9 @@ function loadVoices() {
 
 // ── Navigation ────────────────────────────────────────────────
 function navigateTo(page, data) {
+  // Close sidebar on mobile
+  document.getElementById('sidebar')?.classList.remove('open');
+
   // Hide all pages
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
   // Show target
@@ -995,9 +998,11 @@ function nextSection() {
 }
 
 // ── Sidebar Toggle (Mobile) ────────────────────────────────────
-document.getElementById('sidebarToggle')?.addEventListener('click', () => {
-  document.getElementById('sidebar').classList.toggle('open');
-});
+const toggleSidebar = () => {
+  document.getElementById('sidebar')?.classList.toggle('open');
+};
+document.getElementById('sidebarToggle')?.addEventListener('click', toggleSidebar);
+document.getElementById('mobileMenuBtn')?.addEventListener('click', toggleSidebar);
 
 // ── Keyboard Shortcuts ─────────────────────────────────────────
 document.addEventListener('keydown', e => {

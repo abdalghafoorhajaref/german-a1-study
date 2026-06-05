@@ -152,6 +152,28 @@ body {
   display: none;
 }
 
+/* Mobile Menu Toggle Button (Floating) */
+.mobile-menu-btn {
+  display: none;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-primary);
+  width: 45px;
+  height: 45px;
+  border-radius: 10px;
+  font-size: 22px;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow-md);
+  transition: var(--transition);
+}
+
+.mobile-menu-btn:hover {
+  background: var(--bg-hover);
+  transform: scale(1.05);
+}
+
 .sidebar-nav {
   flex: 1;
   padding: 12px 8px;
@@ -1564,8 +1586,25 @@ body {
     box-shadow: -8px 0 24px rgba(0,0,0,0.5);
   }
 
-  .sidebar-toggle { display: block; }
-  .main-content { margin-right: 0; padding: 20px; }
+  .sidebar-toggle {
+    display: block;
+    font-size: 24px;
+    color: var(--text-primary);
+  }
+
+  .mobile-menu-btn {
+    display: flex;
+    position: fixed;
+    top: 15px;
+    right: 15px;
+    z-index: 90;
+  }
+
+  .main-content {
+    margin-right: 0;
+    padding: 80px 20px 20px 20px;
+  }
+
   .stats-grid { grid-template-columns: 1fr 1fr; }
   .chapters-grid { grid-template-columns: 1fr; }
   .focus-section { grid-template-columns: 1fr; }
