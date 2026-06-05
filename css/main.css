@@ -83,16 +83,29 @@ body {
   min-width: var(--sidebar-width);
   height: 100vh;
   background: var(--bg-secondary);
-  border-left: var(--border-subtle);
   display: flex;
   flex-direction: column;
   position: fixed;
   top: 0;
-  right: 0;
   z-index: 100;
   overflow-y: auto;
   transition: var(--transition);
 }
+
+/* ── Direction Scoped Layouts ── */
+html[dir="ltr"] .sidebar {
+  left: 0;
+  right: auto;
+  border-right: var(--border-subtle);
+  border-left: none;
+}
+html[dir="rtl"] .sidebar {
+  right: 0;
+  left: auto;
+  border-left: var(--border-subtle);
+  border-right: none;
+}
+
 
 .sidebar-header {
   padding: 20px 16px;
@@ -168,6 +181,27 @@ body {
   justify-content: center;
   box-shadow: 0 4px 15px rgba(79, 142, 247, 0.25);
   transition: var(--transition);
+}
+
+/* Sidebar Backdrop Overlay */
+.sidebar-backdrop {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+  z-index: 115; /* Above page content but below mobile sidebar (120) */
+  opacity: 0;
+  transition: opacity 0.25s ease;
+  pointer-events: none;
+}
+.sidebar-backdrop.active {
+  display: block;
+  opacity: 1;
+  pointer-events: auto;
 }
 
 .mobile-menu-btn:hover {
@@ -303,11 +337,19 @@ body {
    ============================================================ */
 .main-content {
   flex: 1;
-  margin-right: var(--sidebar-width);
   height: 100vh;
   overflow-y: auto;
   padding: 32px;
   background: var(--gradient-hero);
+}
+
+html[dir="ltr"] .main-content {
+  margin-left: var(--sidebar-width);
+  margin-right: 0;
+}
+html[dir="rtl"] .main-content {
+  margin-right: var(--sidebar-width);
+  margin-left: 0;
 }
 
 /* ── Pages ── */
@@ -1063,13 +1105,20 @@ body {
 .global-audio-player {
   position: fixed;
   bottom: 0;
-  left: 0;
-  right: var(--sidebar-width);
   z-index: 200;
   background: rgba(22, 27, 34, 0.95);
   backdrop-filter: blur(12px);
   border-top: var(--border-subtle);
   box-shadow: 0 -4px 24px rgba(0,0,0,0.4);
+}
+
+html[dir="ltr"] .global-audio-player {
+  left: var(--sidebar-width);
+  right: 0;
+}
+html[dir="rtl"] .global-audio-player {
+  right: var(--sidebar-width);
+  left: 0;
 }
 
 .audio-player-inner {
@@ -1581,15 +1630,24 @@ body {
 
   .sidebar {
     width: 260px;
-    right: -270px; /* Hide off-screen to the right in RTL */
-    transform: none; /* Disable transform to avoid RTL translation bugs */
+    transform: none;
     z-index: 120; /* Ensure it covers the mobile toggle button when open */
   }
 
-  .sidebar.open {
-    right: 0; /* Slide back in */
-    transform: none;
-    box-shadow: -8px 0 24px rgba(0,0,0,0.5);
+  html[dir="ltr"] .sidebar {
+    left: -270px;
+    right: auto;
+  }
+  html[dir="ltr"] .sidebar.open {
+    left: 0;
+  }
+
+  html[dir="rtl"] .sidebar {
+    right: -270px;
+    left: auto;
+  }
+  html[dir="rtl"] .sidebar.open {
+    right: 0;
   }
 
   .sidebar-toggle {
@@ -1602,12 +1660,21 @@ body {
     display: flex;
     position: fixed;
     top: 15px;
+    z-index: 110;
+  }
+
+  html[dir="ltr"] .mobile-menu-btn {
+    left: 15px;
+    right: auto;
+  }
+  html[dir="rtl"] .mobile-menu-btn {
     right: 15px;
-    z-index: 110; /* Floating button is visible when sidebar is closed */
+    left: auto;
   }
 
   .main-content {
-    margin-right: 0;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
     padding: 80px 20px 20px 20px;
   }
 
@@ -1618,5 +1685,5 @@ body {
   .options-grid { grid-template-columns: 1fr; }
   .flashcard-wrap { width: 100%; }
   .quiz-selection { grid-template-columns: 1fr 1fr; }
-  .global-audio-player { right: 0; }
+  .global-audio-player { left: 0 !important; right: 0 !important; }
 }

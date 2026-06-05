@@ -13,9 +13,6 @@
   <link rel="stylesheet" href="css/skills.css?v=1.1" />
 </head>
 <body>
-  <!-- Mobile Menu Toggle Button -->
-  <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Open Menu">☰</button>
-
   <!-- Sidebar Navigation -->
   <aside class="sidebar" id="sidebar">
     <div class="sidebar-header">
@@ -422,6 +419,12 @@
     </div>
     <audio id="globalAudio" onended="audioEnded()" ontimeupdate="updateAudioProgress()" onloadedmetadata="audioLoaded()"></audio>
   </div>
+
+  <!-- Mobile Menu Overlay Backdrop -->
+  <div class="sidebar-backdrop" id="sidebarBackdrop" onclick="toggleSidebar()"></div>
+
+  <!-- Mobile Menu Toggle Button -->
+  <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Open Menu">☰</button>
 
   <script src="js/curriculum.js"></script>
   <script src="js/vocabulary.js"></script>

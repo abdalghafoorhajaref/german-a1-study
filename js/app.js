@@ -42,6 +42,7 @@ function loadVoices() {
 function navigateTo(page, data) {
   // Close sidebar on mobile
   document.getElementById('sidebar')?.classList.remove('open');
+  document.getElementById('sidebarBackdrop')?.classList.remove('active');
 
   // Hide all pages
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
@@ -998,9 +999,20 @@ function nextSection() {
 }
 
 // ── Sidebar Toggle (Mobile) ────────────────────────────────────
-const toggleSidebar = () => {
-  document.getElementById('sidebar')?.classList.toggle('open');
-};
+function toggleSidebar() {
+  const sidebar = document.getElementById('sidebar');
+  const backdrop = document.getElementById('sidebarBackdrop');
+  if (sidebar) {
+    const isOpen = sidebar.classList.toggle('open');
+    if (backdrop) {
+      if (isOpen) {
+        backdrop.classList.add('active');
+      } else {
+        backdrop.classList.remove('active');
+      }
+    }
+  }
+}
 document.getElementById('sidebarToggle')?.addEventListener('click', toggleSidebar);
 document.getElementById('mobileMenuBtn')?.addEventListener('click', toggleSidebar);
 
