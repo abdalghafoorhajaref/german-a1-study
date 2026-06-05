@@ -155,23 +155,26 @@ body {
 /* Mobile Menu Toggle Button (Floating) */
 .mobile-menu-btn {
   display: none;
-  background: var(--bg-secondary);
-  border: 1px solid var(--border-subtle);
-  color: var(--text-primary);
-  width: 45px;
-  height: 45px;
-  border-radius: 10px;
-  font-size: 22px;
+  background: var(--bg-glass);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(79, 142, 247, 0.4);
+  color: var(--accent-primary);
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  font-size: 24px;
   cursor: pointer;
   align-items: center;
   justify-content: center;
-  box-shadow: var(--shadow-md);
+  box-shadow: 0 4px 15px rgba(79, 142, 247, 0.25);
   transition: var(--transition);
 }
 
 .mobile-menu-btn:hover {
-  background: var(--bg-hover);
+  background: var(--bg-card-hover);
+  color: var(--text-primary);
   transform: scale(1.05);
+  box-shadow: 0 4px 20px rgba(79, 142, 247, 0.4);
 }
 
 .sidebar-nav {
@@ -1578,11 +1581,14 @@ body {
 
   .sidebar {
     width: 260px;
-    transform: translateX(100%);
+    right: -270px; /* Hide off-screen to the right in RTL */
+    transform: none; /* Disable transform to avoid RTL translation bugs */
+    z-index: 120; /* Ensure it covers the mobile toggle button when open */
   }
 
   .sidebar.open {
-    transform: translateX(0);
+    right: 0; /* Slide back in */
+    transform: none;
     box-shadow: -8px 0 24px rgba(0,0,0,0.5);
   }
 
@@ -1597,7 +1603,7 @@ body {
     position: fixed;
     top: 15px;
     right: 15px;
-    z-index: 90;
+    z-index: 110; /* Floating button is visible when sidebar is closed */
   }
 
   .main-content {
