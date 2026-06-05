@@ -65,6 +65,9 @@ body {
   background: var(--bg-primary);
   color: var(--text-primary);
   min-height: 100vh;
+  min-height: 100dvh;
+  height: 100vh;
+  height: 100dvh;
   display: flex;
   overflow: hidden;
 }
@@ -82,6 +85,7 @@ body {
   width: var(--sidebar-width);
   min-width: var(--sidebar-width);
   height: 100vh;
+  height: 100dvh;
   background: var(--bg-secondary);
   display: flex;
   flex-direction: column;
@@ -338,6 +342,7 @@ html[dir="rtl"] .sidebar {
 .main-content {
   flex: 1;
   height: 100vh;
+  height: 100dvh;
   overflow-y: auto;
   padding: 32px;
   background: var(--gradient-hero);
@@ -1110,6 +1115,7 @@ html[dir="rtl"] .main-content {
   backdrop-filter: blur(12px);
   border-top: var(--border-subtle);
   box-shadow: 0 -4px 24px rgba(0,0,0,0.4);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
 }
 
 html[dir="ltr"] .global-audio-player {
@@ -1675,7 +1681,9 @@ html[dir="rtl"] .global-audio-player {
   .main-content {
     margin-left: 0 !important;
     margin-right: 0 !important;
-    padding: 80px 20px 20px 20px;
+    padding: 80px 20px 120px 20px;
+    height: 100vh;
+    height: 100dvh;
   }
 
   .stats-grid { grid-template-columns: 1fr 1fr; }
