@@ -931,7 +931,7 @@ const CURRICULUM = [
       { de: "Mir ist schlecht.", ar: "أشعر بالغثيان." },
       { de: "Ich habe Fieber.", ar: "عندي حمى/سخونة." },
       { de: "Was fehlt Ihnen?", ar: "ما الذي يؤلمك؟" },
-      { de: "Ich muss zum Arzt.", ar: "يجب أن أذهب للطبيب." }
+      { de: "Ich muss zum Arzt gehen.", ar: "يجب أن أذهب للطبيب." }
     ]
   },
 

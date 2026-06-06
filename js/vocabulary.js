@@ -172,7 +172,7 @@ const VOCABULARY = [
   { id:151,ch:8, de:"der Arzt / die Ärztin",ar:"الطبيب / الطبيبة",  type:"noun",    example:"Ich gehe zum Arzt." },
   { id:152,ch:8, de:"das Krankenhaus",  ar:"المستشفى",              type:"noun",    example:"Sie arbeitet im Krankenhaus." },
   { id:153,ch:8, de:"das Medikament",   ar:"الدواء",                type:"noun",    example:"Nehmen Sie Medikamente." },
-  { id:154,ch:8, de:"müssen",           ar:"يجب",                   type:"verb",    example:"Ich muss zum Arzt." },
+  { id:154,ch:8, de:"müssen",           ar:"يجب",                   type:"verb",    example:"Ich muss zum Arzt gehen." },
   { id:155,ch:8, de:"können",           ar:"يستطيع / يمكن",          type:"verb",    example:"Ich kann nicht kommen." },
   { id:156,ch:8, de:"dürfen",           ar:"يجوز / مسموح",           type:"verb",    example:"Man darf nicht rauchen." },
   { id:157,ch:8, de:"wehtun",           ar:"يؤلم",                  type:"verb",    example:"Mein Kopf tut weh." },

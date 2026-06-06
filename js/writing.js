@@ -664,7 +664,7 @@ const WRITING_TOPICS = [
     grammarFocus: [
       "Ich habe + [Körperteil]-schmerzen",
       "seit + Dativ: seit drei Tagen, seit gestern",
-      "Modalverb müssen: Ich muss zum Arzt.",
+      "Modalverb müssen: Ich muss zum Arzt gehen.",
       "Negation: Ich nehme keine Medikamente."
     ],
     structure: [
