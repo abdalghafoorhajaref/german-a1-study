@@ -1,0 +1,14 @@
+# Exclude large textbook PDFs to prevent GitHub file size limit issues (>90MB each)
+/Berliner Platz 1 neu/*.pdf
+
+# Keep files in Extras directory (transcripts, solutions, etc.) if they are not the main large PDFs
+!/Berliner Platz 1 neu/Extras/*.pdf
+
+# Exclude temp, cache, or editor directories
+.DS_Store
+Thumbs.db
+*.log
+.idea/
+.vscode/
+
+
