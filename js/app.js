@@ -78,7 +78,9 @@ function navigateTo(page, data) {
   if (page === 'grammar') populateGrammarPage();
   if (page === 'writing') buildWritingPage();
   if (page === 'conversation') backToConvMenu();
+  if (page === 'summarizer') initSummarizer();
   if (page === 'lesson' && data) openLesson(data);
+
 
   // Scroll to top
   document.getElementById('mainContent').scrollTop = 0;

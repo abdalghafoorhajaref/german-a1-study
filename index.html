@@ -61,6 +61,10 @@
           <span class="nav-icon">🗣️</span>
           <span class="nav-label">ممارسة المحادثة</span>
         </div>
+        <div class="nav-item" data-page="summarizer" id="nav-summarizer" onclick="navigateTo('summarizer')">
+          <span class="nav-icon">📝</span>
+          <span class="nav-label">ملخص دراستي</span>
+        </div>
       </div>
 
       <div class="nav-section">
@@ -387,6 +391,108 @@
         <!-- Final score and button to restart/go back -->
       </div>
     </div>
+
+    <!-- Summarizer Page -->
+    <div class="page" id="page-summarizer">
+      <!-- Print Only Header -->
+      <div class="print-only-header" style="display:none">
+        <h1 id="printChapterTitleDe" style="font-family:'Inter', sans-serif;font-weight:800;margin-bottom:6px;">Kapitel X</h1>
+        <h2 id="printChapterTitleAr" style="font-family:'Cairo', sans-serif;font-weight:700;font-size:18px;">ملخص كلمات الوحدة X</h2>
+        <div style="border-bottom:2px solid #000;margin-top:10px;margin-bottom:20px"></div>
+      </div>
+
+      <div class="page-header">
+        <div class="page-title-area">
+          <h1 class="page-title">دفتر التلخيص والمنظم 📝</h1>
+          <p class="page-subtitle">أدخل المفردات وسيقوم المساعد بتصنيفها وتوليد التصريفات والأدوات تلقائياً للطباعة</p>
+        </div>
+      </div>
+
+      <!-- Stats Grid -->
+      <div class="stats-grid" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 24px;">
+        <div class="stat-card" style="border-top:3px solid var(--accent-primary)">
+          <div class="stat-icon">📚</div>
+          <div class="stat-info">
+            <span class="stat-value" id="sumTotalCount">0</span>
+            <span class="stat-label">إجمالي الكلمات</span>
+          </div>
+        </div>
+        <div class="stat-card" style="border-top:3px solid #4f8ef7">
+          <div class="stat-icon">🏷️</div>
+          <div class="stat-info">
+            <span class="stat-value" id="sumNounsCount">0</span>
+            <span class="stat-label">أسماء Nomen</span>
+          </div>
+        </div>
+        <div class="stat-card" style="border-top:3px solid #f59e0b">
+          <div class="stat-icon">⚡</div>
+          <div class="stat-info">
+            <span class="stat-value" id="sumVerbsCount">0</span>
+            <span class="stat-label">أفعال Verb</span>
+          </div>
+        </div>
+        <div class="stat-card" style="border-top:3px solid #34d399">
+          <div class="stat-icon">🎨</div>
+          <div class="stat-info">
+            <span class="stat-value" id="sumAdjsCount">0</span>
+            <span class="stat-label">صفات Adjektiv</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Input and Control Panel -->
+      <div class="vocab-input-card" style="background:var(--bg-card);border:var(--border-subtle);border-radius:var(--radius-lg);padding:24px;margin-bottom:24px;">
+        <div style="display:flex;gap:16px;align-items:center;flex-wrap:wrap;margin-bottom:16px">
+          <div style="flex:1;min-width:200px">
+            <label class="progress-label" style="display:block;margin-bottom:6px">اختر الوحدة الدراسية (Kapitel):</label>
+            <select class="filter-select" id="sumChapterFilter" style="width:100%;margin:0;" onchange="changeSummarizerChapter(this.value)">
+              <!-- Populated by JS -->
+            </select>
+          </div>
+          
+          <div style="flex:2;min-width:300px;position:relative;" class="suggest-wrap">
+            <label class="progress-label" style="display:block;margin-bottom:6px">أدخل كلمة ألمانية (مثال: Haus أو gehen):</label>
+            <div style="display:flex;gap:8px">
+              <input type="text" id="sumWordInput" class="vocab-search" style="margin:0;width:100%" placeholder="اكتب الكلمة هنا (مثال: der Tisch, fahren, teuer)..." autocomplete="off" />
+              <button class="btn btn-primary" onclick="addSingleWord()">إضافة +</button>
+            </div>
+            <!-- Auto-suggest box -->
+            <div id="sumSuggestBox" class="suggest-box" style="display:none"></div>
+          </div>
+        </div>
+
+        <div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:space-between;align-items:center;border-top:1px solid rgba(255,255,255,0.06);padding-top:16px">
+          <div style="display:flex;gap:8px;flex-wrap:wrap">
+            <button class="btn btn-ghost" onclick="openBulkAddModal()">📝 إضافة جماعية</button>
+            <button class="btn btn-ghost" onclick="triggerImportVocab()">📂 استيراد JSON</button>
+            <button class="btn btn-ghost" onclick="exportCustomVocab()">💾 تصدير احتياطي</button>
+            <button class="btn btn-ghost" onclick="copyCustomVocabAsCode()">📋 نسخ ككود برمجي</button>
+            <input type="file" id="sumImportInput" style="display:none" accept=".json" onchange="importCustomVocab(event)" />
+          </div>
+          
+          <button class="btn btn-primary" style="background:var(--gradient-gold)" onclick="printSummarizer()">🖨️ طباعة الجدول (A4)</button>
+        </div>
+      </div>
+
+      <!-- Vocab Table Container -->
+      <div style="background:var(--bg-card);border:var(--border-subtle);border-radius:var(--radius-lg);overflow:hidden;margin-bottom:32px;">
+        <table class="grammar-table" style="width:100%;margin:0;border-collapse:collapse;">
+          <thead>
+            <tr>
+              <th style="width:50px;text-align:center;">#</th>
+              <th>الكلمة (الترتيب الأبجدي)</th>
+              <th style="width:130px;">النوع</th>
+              <th>التفاصيل (أداة تعريف / تصريفات الأفعال)</th>
+              <th>الترجمة العربية</th>
+              <th class="actions-header" style="width:120px;text-align:center;">إجراءات</th>
+            </tr>
+          </thead>
+          <tbody id="sumTableBody">
+            <!-- Populated by JS -->
+          </tbody>
+        </table>
+      </div>
+    </div>
   </main>
 
   <!-- Toast Notifications -->
@@ -432,6 +538,7 @@
   <script src="js/quiz.js"></script>
   <script src="js/writing.js"></script>
   <script src="js/conversation.js"></script>
+  <script src="js/summarizer.js"></script>
   <script src="js/app.js?v=1.1"></script>
 </body>
 </html>

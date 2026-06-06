@@ -1722,3 +1722,171 @@ html[dir="rtl"] .global-audio-player {
     flex: none;
   }
 }
+
+/* ============================================================
+   STUDY SUMMARIZER STYLES
+   ============================================================ */
+.suggest-box {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: var(--bg-card);
+  border: var(--border-accent);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-card);
+  margin-top: 4px;
+  z-index: 1000;
+  overflow: hidden;
+  max-height: 250px;
+  overflow-y: auto;
+}
+.suggest-item {
+  padding: 10px 14px;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: var(--transition);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+}
+.suggest-item:last-child {
+  border-bottom: none;
+}
+.suggest-item:hover {
+  background: var(--bg-card-hover);
+  color: var(--accent-primary);
+}
+.sum-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(5px);
+  z-index: 2000;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+.sum-modal-card {
+  background: var(--bg-card);
+  border: var(--border-accent);
+  border-radius: var(--radius-lg);
+  max-width: 500px;
+  width: 100%;
+  padding: 24px;
+  box-shadow: var(--shadow-card);
+  animation: fadeInUp 0.3s ease;
+}
+.sum-modal-title {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 16px;
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.sum-details-span {
+  display: inline-block;
+  margin: 2px 4px;
+  font-size: 13px;
+  color: var(--text-primary);
+}
+.sum-trans-text {
+  cursor: pointer;
+  border-bottom: 1px dashed rgba(255, 255, 255, 0.2);
+  padding-bottom: 2px;
+}
+.sum-trans-text:hover {
+  color: var(--accent-primary);
+  border-bottom-color: var(--accent-primary);
+}
+
+/* ── Print Media Query ── */
+@media print {
+  body {
+    background: #ffffff !important;
+    color: #000000 !important;
+    font-size: 12pt;
+    font-family: Arial, sans-serif;
+  }
+  .sidebar, 
+  .mobile-menu-btn, 
+  .vocab-input-card, 
+  .stats-grid, 
+  .btn, 
+  .sum-actions-cell,
+  .actions-header,
+  .toast-container,
+  .global-audio-player,
+  .sidebar-backdrop {
+    display: none !important;
+  }
+  .main-content {
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 100% !important;
+    background: none !important;
+    height: auto !important;
+    overflow: visible !important;
+  }
+  .page {
+    display: none !important;
+  }
+  .page#page-summarizer {
+    display: block !important;
+    animation: none !important;
+  }
+  .print-only-header {
+    display: block !important;
+    text-align: center;
+    color: #000000 !important;
+    margin-bottom: 20px;
+  }
+  .print-only-header h1, 
+  .print-only-header h2 {
+    color: #000000 !important;
+  }
+  .page-header {
+    display: none !important;
+  }
+  table.grammar-table {
+    width: 100% !important;
+    border-collapse: collapse !important;
+    margin: 0 !important;
+    color: #000000 !important;
+  }
+  table.grammar-table th, 
+  table.grammar-table td {
+    border: 1px solid #000000 !important;
+    padding: 8px !important;
+    color: #000000 !important;
+    background: none !important;
+  }
+  table.grammar-table th {
+    font-weight: bold !important;
+    background-color: #f2f2f2 !important;
+  }
+  .vc-type {
+    background: none !important;
+    border: 1px solid #000000 !important;
+    color: #000000 !important;
+    padding: 2px 6px !important;
+    border-radius: 2px !important;
+  }
+  .sum-details-span {
+    color: #000000 !important;
+  }
+  .sum-trans-text {
+    border-bottom: none !important;
+    color: #000000 !important;
+  }
+  .tts-btn {
+    display: none !important;
+  }
+  tr {
+    page-break-inside: avoid !important;
+  }
+}
+
