@@ -29,6 +29,10 @@ document.addEventListener('DOMContentLoaded', () => {
   setDailyContent();
   updateDashboardStats();
   loadVoices();
+
+  // Register sidebar listeners inside DOMContentLoaded
+  document.getElementById('sidebarToggle')?.addEventListener('click', toggleSidebar);
+  document.getElementById('mobileMenuBtn')?.addEventListener('click', toggleSidebar);
 });
 
 function loadVoices() {
@@ -1013,8 +1017,6 @@ function toggleSidebar() {
     }
   }
 }
-document.getElementById('sidebarToggle')?.addEventListener('click', toggleSidebar);
-document.getElementById('mobileMenuBtn')?.addEventListener('click', toggleSidebar);
 
 // ── Keyboard Shortcuts ─────────────────────────────────────────
 document.addEventListener('keydown', e => {

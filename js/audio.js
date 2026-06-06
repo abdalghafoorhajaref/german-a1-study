@@ -147,6 +147,7 @@ function playTrack(trackId, filePath, trackName, chapterName) {
   nameEl.textContent = trackName;
   chEl.textContent = chapterName || '';
   player.style.display = 'block';
+  document.body.classList.add('audio-player-active');
 
   audio.play().then(() => {
     isPlaying = true;
@@ -201,7 +202,10 @@ function closeAudioPlayer() {
   const audio = document.getElementById('globalAudio');
   const player = document.getElementById('globalAudioPlayer');
   if (audio) { audio.pause(); audio.src = ''; }
-  if (player) player.style.display = 'none';
+  if (player) {
+    player.style.display = 'none';
+    document.body.classList.remove('audio-player-active');
+  }
   isPlaying = false;
   currentTrackId = null;
   updateAudioListUI();
