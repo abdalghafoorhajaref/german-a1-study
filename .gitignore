@@ -11,4 +11,7 @@ Thumbs.db
 .idea/
 .vscode/
 
+# Ignore nested multilingual repository
+/multilingual/
+
 
